@@ -26,10 +26,12 @@ def build_trigger():
 
     try:
         response = requests.post(jenkins_trigger)
-    except requests.ConnectionError:
-        print ("Error:", response)
-    except requests.HTTPError:
-        print("Error:", response)
+    except requests.ConnectionError as error:
+        print error
+        return
+    except requests.HTTPError as error:
+        print error
+        return
 
     if response.status_code != 201:
         print("Error: status_code:", response.status_code)
